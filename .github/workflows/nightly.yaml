@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python3 -m pip
+          python3 -m pip build
           yarn install
 
       # Skipped to enable testing on fork
