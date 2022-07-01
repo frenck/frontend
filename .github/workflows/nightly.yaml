@@ -47,7 +47,7 @@ jobs:
       #   env:
       #     LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
 
-      - name: Build night Python wheel package
+      - name: Build nightly Python wheel
         run: |
           yarn install
           rm -rf dist home_assistant_frontend.egg-info
