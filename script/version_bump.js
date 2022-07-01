@@ -25,7 +25,7 @@ function auto(version) {
 }
 
 function nightly(version) {
-  return `${today()}.dev`;
+  return `${today()}-nightly`;
 }
 
 const methods = {
