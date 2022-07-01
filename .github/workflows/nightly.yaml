@@ -47,13 +47,20 @@ jobs:
       #   env:
       #     LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
 
-      - name: Build nightly Python wheel
+      - name: Bump version
+        run: script/version_bump.js nightly
+
+      - name: Build nightly Python wheels
         run: |
           yarn install
+
+          script/build_frontend
+
           rm -rf dist home_assistant_frontend.egg-info
           python3 -m build
 
       - uses: actions/upload-artifact@v3
         with:
+          name: wheels
           path: dist/
           if-no-files-found: error
