@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v2
@@ -35,7 +37,9 @@ jobs:
           cache: yarn
 
       - name: Install dependencies
-        run: yarn install
+        run: |
+          python3 -m pip
+          yarn install
 
       - name: Download Translations
         run: ./script/translations_download
