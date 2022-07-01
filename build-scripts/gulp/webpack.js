@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+webpack-prod-app/* eslint-disable @typescript-eslint/no-var-requires */
 // Tasks to run webpack.
 const fs = require("fs");
 const gulp = require("gulp");

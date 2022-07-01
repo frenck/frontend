@@ -41,11 +41,10 @@ jobs:
           pip install build
           yarn install
 
-      # Skipped to enable testing on fork
-      # - name: Download Translations
-      #   run: ./script/translations_download
-      #   env:
-      #     LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
+      - name: Download Translations
+        run: ./script/translations_download
+        env:
+          LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
 
       - name: Bump version
         run: script/version_bump.js nightly
