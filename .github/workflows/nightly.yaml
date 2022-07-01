@@ -41,10 +41,11 @@ jobs:
           python3 -m pip
           yarn install
 
-      - name: Download Translations
-        run: ./script/translations_download
-        env:
-          LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
+      # Skipped to enable testing on fork
+      # - name: Download Translations
+      #   run: ./script/translations_download
+      #   env:
+      #     LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
 
       - name: Build night Python wheel package
         run: |
