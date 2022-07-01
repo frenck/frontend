@@ -1,0 +1,54 @@
+name: Nightly
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
+
+env:
+  PYTHON_VERSION: 3.10
+  NODE_VERSION: 14
+  NODE_OPTIONS: --max_old_space_size=6144
+
+permissions:
+  actions: none
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Download Translations
+        run: ./script/translations_download
+        env:
+          LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
+
+      - name: Build night Python wheel package
+        run: |
+          yarn install
+          rm -rf dist home_assistant_frontend.egg-info
+          python3 -m build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/
+          if-no-files-found: error
