@@ -14,8 +14,8 @@ permissions:
   actions: none
 
 jobs:
-  release:
-    name: Release
+  nightly:
+    name: Nightly
     runs-on: ubuntu-latest
     permissions:
       contents: read
